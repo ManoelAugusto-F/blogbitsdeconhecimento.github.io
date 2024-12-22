@@ -3,15 +3,17 @@ title: "Configurando IP Estático no Debian"
 date: 2024-07-07
 draft: false
 categories:
-  - Tutorial
-author: "Manoel Augusto"
-tags:
-  - Linux
-  - Debian
-  - Redes
-description: "Aprenda a configurar um IP estático em uma interface de rede no Debian."
+
+- Tutorial
+  author: "Manoel Augusto"
+  tags:
+- Linux
+- Debian
+- Redes
+  description: "Aprenda a configurar um IP estático em uma interface de rede no Debian."
 
 ---
+
 # Configurando IP Estático no Debian
 
 Neste tutorial, aprenderemos a configurar uma interface de rede para utilizar um IP estático no Debian.
@@ -30,15 +32,15 @@ Se o host estiver configurado para DHCP, o IP pode mudar após reinicializaçõe
 ## Configuração do IP Estático
 
 1. **Identifique o Nome da Interface de Rede**
-
+   
    Utilize o comando a seguir para descobrir o nome da interface de rede:
-
+   
    ```bash
    ip addr show
    ```
-
+   
    A saída será semelhante a:
-
+   
    ```bash
    1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
        link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
@@ -53,34 +55,34 @@ Se o host estiver configurado para DHCP, o IP pode mudar após reinicializaçõe
        inet6 fe80::20e:4cff:fe36:5904/64 scope link
           valid_lft forever preferred_lft forever
    ```
-
+   
    No exemplo, o nome da interface é `eth0`. Esse nome pode variar, então ajuste conforme necessário.
 
 2. **Edite o Arquivo de Configuração**
-
+   
    Abra o arquivo de configuração das interfaces:
-
+   
    ```bash
    sudo nano /etc/network/interfaces
    ```
-
+   
    O conteúdo padrão será algo como:
-
+   
    ```bash
    # Este arquivo descreve as interfaces de rede disponíveis no seu sistema
    # e como ativá-las. Para mais informações, consulte interfaces(5).
-
+   
    # A interface de loopback
    auto lo
    iface lo inet loopback
-
+   
    # A interface de rede primária
    allow-hotplug eth0
    iface eth0 inet dhcp
    ```
-
+   
    Modifique o arquivo para definir um IP estático:
-
+   
    ```bash
    # Endereço IP estático
    auto eth0
@@ -91,25 +93,25 @@ Se o host estiver configurado para DHCP, o IP pode mudar após reinicializaçõe
        broadcast 192.168.1.255
        gateway 192.168.1.1
    ```
-
+   
    Lembre-se de substituir `eth0` pelo nome correto da sua interface.
 
 3. **Reinicie o Serviço de Rede**
-
+   
    Após salvar as alterações, reinicie o serviço de rede:
-
+   
    ```bash
    sudo systemctl restart networking
    ```
-
+   
    Verifique se o serviço está ativo:
-
+   
    ```bash
    sudo systemctl status networking
    ```
-
+   
    A saída deve ser similar a:
-
+   
    ```bash
    ● networking.service - LSB: Bring up/down networking
       Loaded: loaded (/etc/init.d/network; generated)
@@ -118,7 +120,7 @@ Se o host estiver configurado para DHCP, o IP pode mudar após reinicializaçõe
        Tasks: 0 (limit: 32768)
       Memory: 0B
       CGroup: /system.slice/network.service
-
+   
    Apr 25 12:00:00 debian systemd[1]: Starting LSB: Bring up/down networking...
    Apr 25 12:00:00 debian network[1234]: Bringing up loopback interface:  [  OK  ]
    Apr 25 12:00:00 debian network[1234]: Bringing up interface eth0:  [  OK  ]
