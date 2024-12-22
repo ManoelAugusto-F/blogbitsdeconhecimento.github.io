@@ -1,5 +1,4 @@
 ---
----
 title: "Configurando IP Estático no Debian"
 date: 2024-07-07
 draft: false
@@ -11,9 +10,6 @@ tags:
   - Debian
   - Redes
 description: "Aprenda a configurar um IP estático em uma interface de rede no Debian."
----
-
-
 ---
 
 # Configurando IP Estático no Debian
