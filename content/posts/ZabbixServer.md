@@ -1,5 +1,4 @@
 ---
----
 title: "Tutorial de como instalar e configurar o Zabbix Server e o Grafana - Parte 1"
 date: 2024-12-22 00:59:19
 tags:
@@ -13,10 +12,6 @@ keywords:
   - Monitoramento de rede
 draft: false
 ---
-
----
-
-# Tutorial de como instalar e configurar o Zabbix Server e o Grafana - Parte 1
 
 E aí, pessoal! Vamos colocar o Zabbix para trabalhar e, de quebra, juntar ele com o Grafana para deixar o monitoramento ainda mais top? Bora lá!
 
