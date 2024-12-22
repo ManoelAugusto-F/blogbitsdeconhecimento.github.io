@@ -1,17 +1,20 @@
 ---
+---
 title: "Tutorial de como instalar e configurar o Zabbix Server e o Grafana - Parte 1"
-date: 2024-12-22T00:59:19-03:00
-draft: true
-categories:
-  - Tutorial
-author: "Manoel Augusto"
+date: 2024-12-22 00:59:19
 tags:
   - Zabbix
   - Grafana
   - Monitoramento
-description: "Aprenda a instalar e configurar o Zabbix Server e o Grafana, no primeiro passo dessa série de tutoriais."
+category: Tutorial
+keywords:
+  - Zabbix Server
+  - Grafana
+  - Monitoramento de rede
+draft: false
 ---
 
+---
 
 # Tutorial de como instalar e configurar o Zabbix Server e o Grafana - Parte 1
 

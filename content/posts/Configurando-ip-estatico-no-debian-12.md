@@ -1,18 +1,21 @@
 ---
+---
 title: "Configurando IP Estático no Debian"
-date: 2024-07-07
-draft: false
-categories:
-  - Tutorial
-author: "Manoel Augusto"
+date: 2024-07-07 00:00:00
 tags:
   - Linux
   - Debian
   - Redes
-description: "Aprenda a configurar um IP estático em uma interface de rede no Debian."
+category: Tutorial
+keywords:
+  - IP Estático
+  - Debian
+  - Redes
+draft: false
+---
 ---
 
-# Configurando IP Estático no Debian
+# 
 
 Neste tutorial, aprenderemos a configurar uma interface de rede para utilizar um IP estático no Debian.
 
