@@ -51,24 +51,21 @@ Verificar PHP:
 php -v
 ```
 
-![](/home/manoel/bitsdeconhecimento/static/image2.png)
+![PHP](/images/img1.png)
 
 Verificar MariaDB:
 
 ```bash
 mysql --version
 ```
-
-![](/home/manoel/bitsdeconhecimento/static/image3.png)
+![MariaDB](/images/img2.png)
 
 Verificar Apache2:
 
 ```bash
 apache2 -v
 ```
-
-![](/home/manoel/bitsdeconhecimento/static/image4.png)
-
+![APACHE](/images/img3.png)
 #### 3º Alguns pacotes úteis na hora de configurar que recomendo instalar:
 
 ```bash
@@ -77,7 +74,7 @@ apt install -y xz-utils bzip2 unzip curl snmp gzip
 
 A partir deste ponto, as instruções podem ser encontradas no próprio site do Zabbix: [Download and install Zabbix](https://www.zabbix.com/download?zabbix=7.0). Segue o link para quem quiser baixar a versão mais atual do Zabbix, que no momento é a 7.0, e estamos usando o Debian 12. No próprio site do Zabbix, é possível escolher outras distribuições e versões, como servidores web (por exemplo, Nginx) ou outros bancos de dados, como o PostgreSQL, de acordo com sua preferência. Estou utilizando essas configurações por gosto pessoal, pois me sinto mais confortável para realizar troubleshooting. Vamos para o próximo passo, seguindo a documentação.
 
-### I Instalando zabbix server
+### Instalando zabbix server
 
 Instalando repositorio zabbix:
 
@@ -104,8 +101,7 @@ Agora, é uma etapa muito importante, por isso deve ser feita com atenção e re
 ```bash
 systemctl status maria.service
 ```
-
-![](/home/manoel/bitsdeconhecimento/static/image5.png)
+![MariaDB-Status](/images/img4.png)
 
 Vamos à configuração básica do MariaDB:
 
@@ -150,7 +146,7 @@ quit;
 
 Se tudo estiver certo, as saídas devem estar semelhantes a estas: 
 
-![](/home/manoel/bitsdeconhecimento/static/image6.png)
+![Queries](/images/img5.png)
 
 Agora, importaremos o schema do banco, assim como os dados iniciais para o Zabbix Server. A senha que será solicitada é a senha que você informou no comando SQL, a qual recomendei mudar. Não é a senha root do banco.
 
@@ -182,7 +178,7 @@ nano /etc/zabbix/zabbix_server.conf
 
 Procure a linha *DBPassword* e coloque a senha definida na hora da criação do banco. Você pode usar `Ctrl + W` para pesquisar por *DBPassword* e alterar o arquivo.
 
-![](/home/manoel/bitsdeconhecimento/static/image7.png)
+![zabbix.conf](/images/img6.png)
 
 Já podemos sair, salvar as novas configurações e reiniciar os serviços do Zabbix Server, Apache e Agent.
 
@@ -204,30 +200,24 @@ Para acessar a interface web, vá para *[http://ENDEREÇO_IP/zabbix](http://ENDE
 hostname -I
 ```
 
-![](/home/manoel/bitsdeconhecimento/static/image9.png)
+![InterfaceWeb](/images/img8.png)
 
 Agora, já temos a nossa interface web para finalizar a instalação do Zabbix. No próximo passo, basta inserir a senha definida no banco e continuar. 
-
-![](/home/manoel/bitsdeconhecimento/static/image10.png)
-
+![InterfaceWeb](/images/img9.png)
 Neste passo, você definirá o nome do seu servidor, o fuso horário e os temas. Lembre-se de ajustar o fuso horário corretamente. 
-
-![](/home/manoel/bitsdeconhecimento/static/image11.png)
-
+![InterfaceWeb](/images/img10.png)
 Ele trará um resumo das configurações. Basta seguir, e ele informará que o Zabbix foi instalado com sucesso e que o arquivo de configuração `.php` foi criado corretamente.
 
 Agora, chegamos à tela inicial de login: 
-
-![](/home/manoel/bitsdeconhecimento/static/image13.png)
-
+![InterfaceWeb](/images/img11.png)
 Usuário: Admin (lembre-se, a senha é "A" maiúscula e não minúscula).
 
 Senha: zabbix
 
 Esta é a primeira tela do Zabbix. Recomendo que você já troque a senha inicial do Zabbix.
-
-![](/home/manoel/bitsdeconhecimento/static/image14.png)
-
+![InterfaceWeb](/images/img12.png)
 No próximo post, instalaremos o Grafana, faremos a integração entre os dois e mostraremos como essa combinação é campeã no monitoramento.
+
+
 
 E como diria Gandalf: "O que você faz com o tempo que tem?" Bem, nós estamos usando o nosso tempo para melhorar o monitoramento com Zabbix e Grafana!
