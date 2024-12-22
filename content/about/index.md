@@ -1,5 +1,5 @@
 ---
-title: "Sobre min"
+title: "Sobre mim e o Blog"
 date: 2024-11-22
 draft: false
 categories:
