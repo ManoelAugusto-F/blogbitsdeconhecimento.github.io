@@ -14,12 +14,12 @@ html {
 }
 
 :root {
-  /* Nebula Glass Color Palette */
-  --bg-deep: #020617; /* Deep Midnight Blue */
-  --accent-primary: #b063e0; /* Primary Purple */
-  --accent-mid-purple: #c485f6; /* Mid Purple */
-  --accent-light-purple: #dbabff; /* Light Purple */
-  --accent-secondary: #00ffff; /* Cyber Cyan */
+  /* Tech Palette */
+  --bg-deep: #0f172a; /* Azul petróleo escuro */
+  --accent-primary: #22c55e; /* Verde técnico */
+  --accent-mid-purple: #34d399;
+  --accent-light-purple: #86efac;
+  --accent-secondary: #4ade80;
   --glass-surface: rgba(255, 255, 255, 0.05);
   --glass-border: rgba(255, 255, 255, 0.1);
   --glass-block: rgb(255, 255, 255);
@@ -28,19 +28,19 @@ html {
   --bg-primary: var(--bg-deep);
   --bg-secondary: var(--glass-surface);
   --bg-tertiary: rgba(255, 255, 255, 0.08);
-  --text-primary: #f1f5f9;
+  --text-primary: #e5e7eb;
   --text-secondary: #cbd5e1;
   --text-muted: #94a3b8;
-  --accent-hover: #c485f6;
+  --accent-hover: #34d399;
   --border-color: var(--glass-border);
   /* Dark theme rgba values for effects */
-  --accent-primary-rgba-03: rgba(176, 99, 224, 0.3);
-  --accent-primary-rgba-05: rgba(176, 99, 224, 0.5);
-  --accent-light-purple-rgba-01: rgba(219, 171, 255, 0.1);
-  --accent-light-purple-rgba-03: rgba(219, 171, 255, 0.3);
-  --accent-mid-purple-rgba-05: rgba(196, 133, 246, 0.05);
-  --accent-mid-purple-rgba-01: rgba(196, 133, 246, 0.1);
-  --accent-mid-purple-rgba-02: rgba(196, 133, 246, 0.2);
+  --accent-primary-rgba-03: rgba(34, 197, 94, 0.3);
+  --accent-primary-rgba-05: rgba(34, 197, 94, 0.5);
+  --accent-light-purple-rgba-01: rgba(134, 239, 172, 0.1);
+  --accent-light-purple-rgba-03: rgba(134, 239, 172, 0.3);
+  --accent-mid-purple-rgba-05: rgba(52, 211, 153, 0.05);
+  --accent-mid-purple-rgba-01: rgba(52, 211, 153, 0.1);
+  --accent-mid-purple-rgba-02: rgba(52, 211, 153, 0.2);
   /* Tag styling for dark theme */
   --tag-bg: rgba(0, 0, 0, 0.4);
   --tag-color: var(--accent-light-purple);
@@ -49,8 +49,8 @@ html {
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
 
   /* Scroll to top & Buy Me a Coffee */
-  --yellow-accent: #ffdd00;
-  --yellow-hover: #ffc700;
+  --yellow-accent: #22c55e;
+  --yellow-hover: #34d399;
 
   /* Spacing */
   --spacing-xs: 0.25rem;
