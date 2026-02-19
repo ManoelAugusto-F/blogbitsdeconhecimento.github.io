@@ -99,14 +99,14 @@ apt install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sq
 Agora, é uma etapa muito importante, por isso deve ser feita com atenção e requer pequenas alterações nos comandos. Primeiro, vamos certificar-nos de que nosso banco de dados está rodando.
 
 ```bash
-systemctl status maria.service
+systemctl status mariadb.service
 ```
 ![MariaDB-Status](/images/img4.png)
 
 Vamos à configuração básica do MariaDB:
 
 ```bash
-mysql_secure_installation
+mariadb-secure-installation
 ```
 
 - Definir a senha do root (lembrando que esta será a senha solicitada toda vez para logar no console como root do MariaDB).
