@@ -1,16 +1,15 @@
-baseURL = "https://www.bitsdeconhecimento.blog.br/"
-languageCode = "pt-br"
-title = "Bits de Conhecimento"
+baseURL = 'https://example.com/'
+languageCode = 'en-US'
+title = "Your Site Title"
 theme = "mana"
-copyright = "Manoel Augusto"
 
 # Theme configuration
 [params]
-  description = "Este blog é o meu espaço pessoal para compartilhar aprendizados na área de TI, com foco em Infraestrutura, Segurança, Cloud Computing, Linux e Redes. Aqui, registro descobertas, experiências e soluções para desafios do cotidiano de forma simples e prática."
-  author = "Manoel Augusto"
+  description = "Your site description"
+  author = "Your Name"
   favicon = "/favicon/logo-transparent/favicon.ico"
-  heroTitleLine1 = "BITS DE"
-  heroTitleLine2 = "CONHECIMENTO"
+  heroTitleLine1 = "YOUR SITE NAME"
+  heroTitleLine2 = "YOUR TAGLINE"
   
   # 404 Page Configuration
   # Custom message for the 404 error page (supports HTML)
@@ -19,9 +18,9 @@ copyright = "Manoel Augusto"
   
   # Social media links
   [params.social]
-    github = "https://github.com/ManoelAugusto-F"
-    linkedin = "https://www.linkedin.com/in/manoel-augusto/"
-    email = "manoelaugusto.ferreira@gmail.com"
+    github = "https://github.com/yourusername"
+    linkedin = "https://www.linkedin.com/in/yourprofile"
+    email = "your.email@example.com"
   
   # Avatar Configuration
   [params.avatar]
@@ -66,9 +65,9 @@ copyright = "Manoel Augusto"
   # Set enabled = true and provide your widget ID to use the floating widget
   # Leave enabled = false or unset to use a simple link instead
   [params.buyMeACoffee]
-    enabled = false
-    id = ""
-    description = ""
+    enabled = true
+    id = "yourwidgetid"
+    description = "Support me on Buy me a coffee!"
     message = ""
     color = "#BD5FFF"
     position = "Right"
@@ -83,16 +82,16 @@ copyright = "Manoel Augusto"
     # Set this if you want a range, rather than just the current year (as of the last time you ran "hugo build").
     startYear = 2025
     # Set this if you don't want the copyright owner to be the same value as the "title" field above.
-    owner = "Manoel Augusto"
+    owner = "Your name here"
   
   # Footer text (optional)
-  footerText = "Conteúdo sobre Infraestrutura, Segurança, Cloud, Linux e Redes"
+  footerText = "Built with Hugo and Mana theme"
   
   # Code syntax highlighting themes
   # Options: Any valid Chroma style name (e.g., "catppuccin-macchiato", "catppuccin-frappe", "github", "monokai", etc.)
   [params.codeHighlight]
-    darkTheme = "catppuccin-macchiato"
-    lightTheme = "catppuccin-frappe"
+    darkTheme = "catppuccin-macchiato"   # Theme for dark mode
+    lightTheme = "catppuccin-frappe"     # Theme for light mode
 
   # Umami Analytics (optional)
   # Set your Umami website ID for page tracking
@@ -101,36 +100,36 @@ copyright = "Manoel Augusto"
 
 # Main menu
 [[menus.main]]
-name = "Início"
-url = "/"
+name = 'Home'
+pageRef = '/'
 weight = 10
 
 [[menus.main]]
-name = "Artigos"
-url = "/posts"
+name = 'Posts'
+pageRef = '/posts'
 weight = 20
 
 [[menus.main]]
-name = "Tags"
-url = "/tags"
+name = 'Tags'
+pageRef = '/tags'
 weight = 30
 
 [[menus.main]]
-name = "Sobre"
-url = "/about"
+name = 'About'
+url = '/about/'
 weight = 40
 
 # Pagination Configuration
 # Configure how many posts to show per page
 # Default is 10 if not specified
 [pagination]
-  pageSize = 5
+  pageSize = 10  # Number of posts per page
 
 # Table of Contents (recommended)
 [markup]
   [markup.tableOfContents]
-    startLevel = 2
-    endLevel = 4
+    startLevel = 1
+    endLevel = 6
     ordered = false
 
 # Allow raw HTML within Markdown (for KaTeX, etc.)
@@ -147,9 +146,9 @@ weight = 40
 # Syntax highlighting configuration
   [markup.highlight]
     codeFences = true
-    guessSyntax = false
+    guessSyntax = true
     noClasses = false
-    style = "dracula"
+    style = "catppuccin-macchiato"  # Default style (will be overridden by theme-aware CSS)
 
 # Output formats for search index
 [outputs]
