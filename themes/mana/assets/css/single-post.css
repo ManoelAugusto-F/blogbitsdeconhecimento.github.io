@@ -294,6 +294,14 @@
   margin-bottom: var(--spacing-md);
 }
 
+.post-content-main img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: var(--spacing-md) auto;
+  border-radius: 0.375rem;
+}
+
 .post-content-main ul,
 .post-content-main ol {
   margin-bottom: var(--spacing-md);
