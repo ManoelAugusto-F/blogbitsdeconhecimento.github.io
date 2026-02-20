@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Zabbix on Bits de Conhecimento</title>
+    <link>https://www.bitsdeconhecimento.blog.br/tags/zabbix/</link>
+    <description>Recent content in Zabbix on Bits de Conhecimento</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <copyright>Manoel Augusto</copyright>
+    <lastBuildDate>Sun, 22 Dec 2024 00:59:19 +0000</lastBuildDate><atom:link href="https://www.bitsdeconhecimento.blog.br/tags/zabbix/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Tutorial de como instalar e configurar o Zabbix Server e o Grafana - Parte 1</title>
+      <link>https://www.bitsdeconhecimento.blog.br/posts/zabbixserver/</link>
+      <pubDate>Sun, 22 Dec 2024 00:59:19 +0000</pubDate>
+      
+      <guid>https://www.bitsdeconhecimento.blog.br/posts/zabbixserver/</guid>
+      <description>E aí, pessoal! Vamos colocar o Zabbix para trabalhar e, de quebra, juntar ele com o Grafana para deixar o monitoramento ainda mais top? Bora lá!
+Pré-requisitos:   Servidor Debian ou Ubuntu, na versão mais atual, com acesso à internet e senha de root para acesso durante a instalação.
+  Requisitos para a VM ou servidor, segundo a própria documentação do Zabbix, para até 1000 clientes sendo monitorados: idealmente, 2 vCPUs, 8 GB de memória e 50 a 60 GB de armazenamento.</description>
+    </item>
+    
+  </channel>
+</rss>

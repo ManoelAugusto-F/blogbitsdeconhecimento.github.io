@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Bits de Conhecimento</title>
+    <link>https://www.bitsdeconhecimento.blog.br/posts/</link>
+    <description>Recent content in Posts on Bits de Conhecimento</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <copyright>Manoel Augusto</copyright>
+    <lastBuildDate>Sun, 22 Dec 2024 00:59:19 +0000</lastBuildDate><atom:link href="https://www.bitsdeconhecimento.blog.br/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Tutorial de como instalar e configurar o Zabbix Server e o Grafana - Parte 1</title>
+      <link>https://www.bitsdeconhecimento.blog.br/posts/zabbixserver/</link>
+      <pubDate>Sun, 22 Dec 2024 00:59:19 +0000</pubDate>
+      
+      <guid>https://www.bitsdeconhecimento.blog.br/posts/zabbixserver/</guid>
+      <description>E aí, pessoal! Vamos colocar o Zabbix para trabalhar e, de quebra, juntar ele com o Grafana para deixar o monitoramento ainda mais top? Bora lá!
+Pré-requisitos:   Servidor Debian ou Ubuntu, na versão mais atual, com acesso à internet e senha de root para acesso durante a instalação.
+  Requisitos para a VM ou servidor, segundo a própria documentação do Zabbix, para até 1000 clientes sendo monitorados: idealmente, 2 vCPUs, 8 GB de memória e 50 a 60 GB de armazenamento.</description>
+    </item>
+    
+    <item>
+      <title>Configurando IP Estático no Debian</title>
+      <link>https://www.bitsdeconhecimento.blog.br/posts/configurando-ip-estatico-no-debian-12/</link>
+      <pubDate>Sun, 07 Jul 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bitsdeconhecimento.blog.br/posts/configurando-ip-estatico-no-debian-12/</guid>
+      <description>Neste tutorial, aprenderemos a configurar uma interface de rede para utilizar um IP estático no Debian.
+Quando é necessário um IP Estático? Um IP estático é essencial em situações como:
+ Servidores Web Bancos de dados Serviços de NAS Qualquer serviço que precise de um IP fixo  Se o host estiver configurado para DHCP, o IP pode mudar após reinicializações ou expiração do IP.
+Configuração do IP Estático   Identifique o Nome da Interface de Rede</description>
+    </item>
+    
+  </channel>
+</rss>
