@@ -85,52 +85,52 @@ html {
 }
 
 [data-theme="light"] {
-  --bg-primary: #ffffff;
+  --bg-primary: #0f172a;
   /* Light theme glassmorphism - minimal white overlay, backdrop blur creates the glassy effect */
   --glass-surface: rgba(
     255,
     255,
     255,
-    0.2
+    0.05
   ); /* Minimal white overlay - backdrop blur does the work */
   --glass-border: rgba(
-    196,
-    181,
-    253,
-    0.5
-  ); /* More defined purple-tinted border for better visibility */
-  --glass-block: rgba(255, 255, 255, 0.8);
+    34,
+    197,
+    94,
+    0.3
+  ); /* More defined green-tinted border for better visibility */
+  --glass-block: rgba(15, 23, 42, 0.9);
   --bg-secondary: var(--glass-surface); /* Use glass-surface for glass effect */
   --bg-tertiary: rgba(
     255,
     255,
     255,
-    0.25
+    0.08
   ); /* Slightly more visible for tertiary surfaces */
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #64748b;
-  /* Light theme purple palette - much darker, more saturated for contrast on light backgrounds */
-  --accent-primary: #6b21a8; /* Very dark purple for primary */
-  --accent-mid-purple: #7c3aed; /* Dark purple for mid */
-  --accent-light-purple: #9333ea; /* Medium-dark purple for light accent */
-  --accent-secondary: #7e22ce;
-  --accent-hover: #7c3aed;
+  --text-primary: #e5e7eb;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  /* Light theme green palette - verde técnico for contrast on dark backgrounds */
+  --accent-primary: #22c55e; /* Verde técnico for primary */
+  --accent-mid-purple: #34d399; /* Lighter green for mid */
+  --accent-light-purple: #86efac; /* Light green for light accent */
+  --accent-secondary: #4ade80;
+  --accent-hover: #34d399;
   --border-color: var(--glass-border);
-  /* Light theme rgba values for effects - darker purples for better contrast */
-  --accent-primary-rgba-03: rgba(107, 33, 168, 0.3);
-  --accent-primary-rgba-05: rgba(107, 33, 168, 0.5);
-  --accent-light-purple-rgba-01: rgba(147, 51, 234, 0.1);
-  --accent-light-purple-rgba-03: rgba(147, 51, 234, 0.3);
-  --accent-mid-purple-rgba-05: rgba(124, 58, 237, 0.05);
-  --accent-mid-purple-rgba-01: rgba(124, 58, 237, 0.1);
-  --accent-mid-purple-rgba-02: rgba(124, 58, 237, 0.2);
-  /* Tag styling for light theme - lighter background, darker purple text */
-  --tag-bg: rgba(124, 58, 237, 0.1);
-  --tag-color: #6b21a8;
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  /* Light theme rgba values for effects - greens for better contrast */
+  --accent-primary-rgba-03: rgba(34, 197, 94, 0.3);
+  --accent-primary-rgba-05: rgba(34, 197, 94, 0.5);
+  --accent-light-purple-rgba-01: rgba(134, 239, 172, 0.1);
+  --accent-light-purple-rgba-03: rgba(134, 239, 172, 0.3);
+  --accent-mid-purple-rgba-05: rgba(52, 211, 153, 0.05);
+  --accent-mid-purple-rgba-01: rgba(52, 211, 153, 0.1);
+  --accent-mid-purple-rgba-02: rgba(52, 211, 153, 0.2);
+  /* Tag styling for light theme - darker background, light green text */
+  --tag-bg: rgba(34, 197, 94, 0.1);
+  --tag-color: #86efac;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
 }
 
 body {
@@ -159,17 +159,17 @@ body {
 
 /* Light theme background */
 [data-theme="light"] {
-  --bg-deep: #ffffff; /* Override bg-deep for light theme */
+  --bg-deep: #0f172a; /* Override bg-deep for light theme */
 }
 
 [data-theme="light"] body {
-  background-color: #ffffff;
-  /* Light theme radial gradient: subtle purple/lavender tint in center, fading to white at edges */
+  background-color: #0f172a;
+  /* Light theme radial gradient: subtle green tint in center, fading to dark blue at edges */
   background-image: radial-gradient(
     circle at center,
-    rgba(196, 133, 246, 0.2) 0%,
-    rgba(243, 232, 255, 0.4) 40%,
-    #ffffff 100%
+    rgba(30, 58, 138, 0.3) 0%,
+    rgba(15, 23, 42, 0.5) 40%,
+    #0f172a 100%
   );
   background-attachment: fixed;
   background-size: 100% 100%;
