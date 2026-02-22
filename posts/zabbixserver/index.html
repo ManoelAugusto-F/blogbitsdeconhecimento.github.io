@@ -1,0 +1,773 @@
+<!doctype html>
+<html
+  lang="pt-br"
+  dir="ltr"
+  class="h-full">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="language" content="pt-br">
+<script>
+  
+  (function () {
+    const storedTheme = localStorage.getItem("theme");
+    const systemPrefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+    const theme = storedTheme || (systemPrefersLight ? "light" : "dark");
+    document.documentElement.setAttribute("data-theme", theme);
+  })();
+</script>
+<title>Tutorial de como instalar e configurar o Zabbix Server e o Grafana - Parte 1 | Bits de Conhecimento</title>
+<meta
+  name="description"
+  content="
+    E aí, pessoal! Vamos colocar o Zabbix para trabalhar e, de quebra, juntar ele com o Grafana para deixar o monitoramento ainda mais top? Bora lá!
+Pré-requisitos: …
+  
+  ">
+
+
+  <meta name="keywords" content="Zabbix, Grafana, Monitoramento">
+
+
+
+  <meta name="author" content="Manoel Augusto">
+
+
+
+<link rel="canonical" href="https://www.bitsdeconhecimento.blog.br/posts/zabbixserver/">
+
+<meta name="robots" content="index, follow">
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tutorial de como instalar e configurar o Zabbix Server e o Grafana - Parte 1 | Bits de Conhecimento">
+<meta property="og:description" content="E aí, pessoal! Vamos colocar o Zabbix para trabalhar e, de quebra, juntar ele com o Grafana para deixar o monitoramento ainda mais top? Bora lá!
+Pré-requisitos: …">
+<meta property="og:url" content="https://www.bitsdeconhecimento.blog.br/posts/zabbixserver/">
+<meta property="og:site_name" content="Bits de Conhecimento"><meta property="article:published_time" content="2024-12-22T00:59:19Z">
+  <meta
+    property="article:modified_time"
+    content="2024-12-22T00:59:19Z"><meta property="article:section" content="Zabbix"><meta property="article:tag" content="Zabbix"><meta property="article:tag" content="Grafana"><meta property="article:tag" content="Monitoramento">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tutorial de como instalar e configurar o Zabbix Server e o Grafana - Parte 1 | Bits de Conhecimento">
+<meta name="twitter:description" content="E aí, pessoal! Vamos colocar o Zabbix para trabalhar e, de quebra, juntar ele com o Grafana para deixar o monitoramento ainda mais top? Bora lá!
+Pré-requisitos: …">
+
+<script type="application/ld+json">
+
+
+
+
+
+
+
+
+
+
+
+
+"{\"@context\":\"https://schema.org\",\"@type\":\"BlogPosting\",\"author\":{\"@type\":\"Person\",\"email\":\"manoelaugusto.ferreira@gmail.com\",\"name\":\"Manoel Augusto\"},\"dateModified\":\"2024-12-22T00:59:19Z\",\"datePublished\":\"2024-12-22T00:59:19Z\",\"description\":\"E aí, pessoal! Vamos colocar o Zabbix para trabalhar e, de quebra, juntar ele com o Grafana para deixar o monitoramento ainda mais top? Bora lá!\\nPré-requisitos: …\",\"headline\":\"Tutorial de como instalar e configurar o Zabbix Server e o Grafana - Parte 1\",\"image\":null,\"keywords\":[\"Zabbix\",\"Grafana\",\"Monitoramento\"],\"mainEntityOfPage\":{\"@id\":\"https://www.bitsdeconhecimento.blog.br/posts/zabbixserver/\",\"@type\":\"WebPage\"},\"publisher\":{\"@type\":\"Organization\",\"logo\":{\"@type\":\"ImageObject\",\"url\":null},\"name\":\"Bits de Conhecimento\"}}"</script>
+
+
+
+  
+  
+  
+  
+    
+    
+  
+  
+<script type="application/ld+json">"{\"@context\":\"https://schema.org\",\"@type\":\"BreadcrumbList\",\"itemListElement\":[{\"@type\":\"ListItem\",\"item\":\"https://www.bitsdeconhecimento.blog.br/\",\"name\":\"Bits de Conhecimento\",\"position\":1},{\"@type\":\"ListItem\",\"item\":\"https://www.bitsdeconhecimento.blog.br/posts/\",\"name\":\"Posts\",\"position\":2},{\"@type\":\"ListItem\",\"item\":\"https://www.bitsdeconhecimento.blog.br/posts/zabbixserver/\",\"name\":\"Tutorial de como instalar e configurar o Zabbix Server e o Grafana - Parte 1\",\"position\":3}]}"</script>
+
+
+
+
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+  rel="stylesheet">
+
+
+<link
+  rel="stylesheet"
+  href="/css/theme.min.f0ef2955e12964f0e67fba05d53c3a4f5a963410f5e3a9c42fddc9a97dc1032b.css"
+  integrity="sha256-8O8pVeEpZPDmf7oF1Tw6T1qWNBD146nEL93JqX3BAys=">
+
+<link
+    rel="stylesheet"
+    href="/css/syntax-dark.min.b01037e5609e6260b74d6fcdd6d5131e8dcbc4d46d6ef4bfbe5a60bdfc1a9f30.css"
+    integrity="sha256-sBA35WCeYmC3TW/N1tUTHo3LxNRtbvS/vlpgvfwanzA="
+    id="syntax-dark-theme"
+    class="syntax-theme"><link
+    rel="stylesheet"
+    href="/css/syntax-light.min.9602bc2fcef52b4c62e05eae14b48ba428e114f116e993e504d83ed5a3aeda98.css"
+    integrity="sha256-lgK8L871K0xi4F6uFLSLpCjhFPEW6ZPlBNg&#43;1aOu2pg="
+    id="syntax-light-theme"
+    class="syntax-theme"
+    disabled><script>
+  
+  (function () {
+    const storedTheme = localStorage.getItem("theme");
+    const systemPrefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+    const theme = storedTheme || (systemPrefersLight ? "light" : "dark");
+
+    const syntaxDark = document.getElementById("syntax-dark-theme");
+    const syntaxLight = document.getElementById("syntax-light-theme");
+
+    if (theme === "light") {
+      if (syntaxDark) syntaxDark.disabled = true;
+      if (syntaxLight) syntaxLight.disabled = false;
+    } else {
+      if (syntaxDark) syntaxDark.disabled = false;
+      if (syntaxLight) syntaxLight.disabled = true;
+    }
+
+    
+    const observer = new MutationObserver(() => {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      if (currentTheme === "light") {
+        if (syntaxDark) syntaxDark.disabled = true;
+        if (syntaxLight) syntaxLight.disabled = false;
+      } else {
+        if (syntaxDark) syntaxDark.disabled = false;
+        if (syntaxLight) syntaxLight.disabled = true;
+      }
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+  })();
+</script>
+
+
+
+
+<link
+  rel="stylesheet"
+  href="/css/bundle.min.7466a4d8f47a0c665aa9fecfe7c262644202b9a9fe46554272a9278c0472c6fa.css"
+  integrity="sha256-dGak2PR6DGZaqf7P58JiZEICuan&#43;RlVCcqknjARyxvo=">
+
+
+
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+
+
+<link rel="icon" type="image/png" href="/favicon.png">
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+
+
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+<link rel="manifest" href="/site.webmanifest">
+
+
+
+
+  
+
+
+
+
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <a href="#main-content" class="skip-to-main" aria-label="Skip to main content"
+      >Skip to main content</a
+    >
+    <header class="sticky-header">
+      <div class="header-container">
+        <nav class="header-nav" role="navigation" aria-label="Main navigation">
+  <div class="header-content">
+    <div class="header-logo">
+      <a href="/" class="logo-link" aria-label="Home - Bits de Conhecimento">
+        Bits de Conhecimento
+      </a>
+    </div>
+
+    
+    <button 
+      id="mobile-menu-toggle" 
+      class="mobile-menu-toggle" 
+      aria-label="Toggle menu" 
+      aria-expanded="false"
+      type="button">
+      <span class="hamburger-icon">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </span>
+    </button>
+
+    <div class="header-menu">
+      <ul class="menu-list">
+  
+    <li class="menu-item">
+      <a
+        href="/"
+        class="menu-link ">
+        Início
+      </a>
+    </li>
+  
+    <li class="menu-item">
+      <a
+        href="/posts"
+        class="menu-link ">
+        Artigos
+      </a>
+    </li>
+  
+    <li class="menu-item">
+      <a
+        href="/tags"
+        class="menu-link ">
+        Tags
+      </a>
+    </li>
+  
+    <li class="menu-item">
+      <a
+        href="/about"
+        class="menu-link ">
+        Sobre
+      </a>
+    </li>
+  
+</ul>
+
+
+      <button id="search-toggle" class="search-toggle" aria-label="Search" type="button">
+        <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+      </button>
+
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" type="button">
+  <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+  </svg>
+  <svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+  </svg>
+</button>
+
+    </div>
+  </div>
+
+  
+  <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-overlay"></div>
+    <div class="mobile-menu-content">
+      <div class="mobile-menu-header">
+        <span class="mobile-menu-title">Menu</span>
+        <button 
+          id="mobile-menu-close" 
+          class="mobile-menu-close" 
+          aria-label="Close menu" 
+          type="button">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <nav class="mobile-menu-nav" role="navigation" aria-label="Mobile navigation">
+        <ul class="menu-list">
+  
+    <li class="menu-item">
+      <a
+        href="/"
+        class="menu-link ">
+        Início
+      </a>
+    </li>
+  
+    <li class="menu-item">
+      <a
+        href="/posts"
+        class="menu-link ">
+        Artigos
+      </a>
+    </li>
+  
+    <li class="menu-item">
+      <a
+        href="/tags"
+        class="menu-link ">
+        Tags
+      </a>
+    </li>
+  
+    <li class="menu-item">
+      <a
+        href="/about"
+        class="menu-link ">
+        Sobre
+      </a>
+    </li>
+  
+</ul>
+
+      </nav>
+      <div class="mobile-menu-footer">
+        <button id="mobile-search-toggle" class="mobile-search-toggle" aria-label="Search" type="button">
+          <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+          <span>Search</span>
+        </button>
+        <button class="theme-toggle" aria-label="Toggle theme" type="button">
+          <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+          </svg>
+          <svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+      </div>
+    </header>
+
+    <main id="main-content" class="flex-1" role="main">
+      
+  <div class="single-post-wrapper">
+    <article class="single-post">
+      
+
+
+
+
+
+
+
+      <header class="post-header">
+        <h1 class="post-title-main">Tutorial de como instalar e configurar o Zabbix Server e o Grafana - Parte 1</h1>
+
+        
+
+        <div class="post-meta">
+  <div class="post-meta-info">
+    <time datetime="2024-12-22T00:59:19Z" class="post-date">
+      <svg class="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+      </svg>
+      December 22, 2024
+    </time>
+
+    <span class="meta-separator">•</span>
+
+    
+      <span class="post-word-count">
+        <svg class="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+        </svg>
+        881 words
+      </span>
+    
+
+    
+      <span class="meta-separator">•</span>
+      <span class="post-reading-time">
+        <svg class="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        5 min
+      </span>
+    
+  </div>
+
+  
+    <div class="post-tags">
+      
+        <a href="/tags/zabbix" class="post-tag">Zabbix</a>
+      
+        <a href="/tags/grafana" class="post-tag">Grafana</a>
+      
+        <a href="/tags/monitoramento" class="post-tag">Monitoramento</a>
+      
+    </div>
+  
+</div>
+
+      </header>
+
+      <div class="post-content-main">
+        <p>E aí, pessoal! Vamos colocar o Zabbix para trabalhar e, de quebra, juntar ele com o Grafana para deixar o monitoramento ainda mais top? Bora lá!</p>
+<h4 id="pré-requisitos">Pré-requisitos:</h4>
+<ul>
+<li>
+<p>Servidor Debian ou Ubuntu, na versão mais atual, com acesso à internet e senha de root para acesso durante a instalação.</p>
+</li>
+<li>
+<p>Requisitos para a VM ou servidor, segundo a própria documentação do Zabbix, para até 1000 clientes sendo monitorados: idealmente, 2 vCPUs, 8 GB de memória e 50 a 60 GB de armazenamento.</p>
+</li>
+<li>
+<p>O servidor deve ter acesso à internet, caso contrário, a instalação não será possível.</p>
+</li>
+</ul>
+<h3 id="criando-o-ambiente">Criando o ambiente</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">su -
+</code></pre></div><p>Após inserir a senha do usuário root, lembrando que este tutorial está sendo feito no Debian 12, o próximo passo será configurar o que chamamos de LAMP (<strong>L</strong>inux, <strong>A</strong>pache, <strong>M</strong>ariaDB ou <strong>M</strong>ySQL e <strong>P</strong>HP).</p>
+<h4 id="1º-passo-atualizar-a-máquina">1º Passo: Atualizar a máquina:</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">apt update <span class="o">&amp;&amp;</span>  apt upgrade -y
+</code></pre></div><h4 id="2º-passo-instalaremos-de-uma-única-vez-o-apache-mariadb-e-php">2º Passo: Instalaremos de uma única vez o Apache, MariaDB e PHP.</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">apt install -y apache2 mariadb-server php libapache2-mod-php php-cli php-fpm php-json php-pdo php-mysql php-zip php-gd php-mbstring php-curl php-xml php-pear php-bcmath
+</code></pre></div><p>Você pode verificar se todos foram instalados corretamente com os comandos abaixo, conferindo as saídas:</p>
+<p>Verificar PHP:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">php -v
+</code></pre></div><p><img src="/images/img1.png" alt="PHP"></p>
+<p>Verificar MariaDB:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">mysql --version
+</code></pre></div><p><img src="/images/img2.png" alt="MariaDB"></p>
+<p>Verificar Apache2:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">apache2 -v
+</code></pre></div><p><img src="/images/img3.png" alt="APACHE"></p>
+<h4 id="3º-alguns-pacotes-úteis-na-hora-de-configurar-que-recomendo-instalar">3º Alguns pacotes úteis na hora de configurar que recomendo instalar:</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">apt install -y xz-utils bzip2 unzip curl snmp gzip
+</code></pre></div><p>A partir deste ponto, as instruções podem ser encontradas no próprio site do Zabbix: <a href="https://www.zabbix.com/download?zabbix=7.0">Download and install Zabbix</a>. Segue o link para quem quiser baixar a versão mais atual do Zabbix, que no momento é a 7.0, e estamos usando o Debian 12. No próprio site do Zabbix, é possível escolher outras distribuições e versões, como servidores web (por exemplo, Nginx) ou outros bancos de dados, como o PostgreSQL, de acordo com sua preferência. Estou utilizando essas configurações por gosto pessoal, pois me sinto mais confortável para realizar troubleshooting. Vamos para o próximo passo, seguindo a documentação.</p>
+<h3 id="instalando-zabbix-server">Instalando zabbix server</h3>
+<p>Instalando repositorio zabbix:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">wget https://repo.zabbix.com/zabbix/7.0/debian/pool/main/z/zabbix-release/zabbix-release_latest_7.0+debian12_all.deb
+</code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">dpkg -i zabbix-release_latest_7.0+debian12_all.deb
+</code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">apt update
+</code></pre></div><p>Agora, instalaremos os pacotes do Zabbix Server, Frontend e Agent.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">apt install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent
+</code></pre></div><p>Agora, é uma etapa muito importante, por isso deve ser feita com atenção e requer pequenas alterações nos comandos. Primeiro, vamos certificar-nos de que nosso banco de dados está rodando.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">systemctl status mariadb.service
+</code></pre></div><p><img src="/images/img4.png" alt="MariaDB-Status"></p>
+<p>Vamos à configuração básica do MariaDB:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">mariadb-secure-installation
+</code></pre></div><ul>
+<li>Definir a senha do root (lembrando que esta será a senha solicitada toda vez para logar no console como root do MariaDB).</li>
+<li>Remover usuários anônimos.</li>
+<li>Desabilitar o login remoto para o usuário root.</li>
+<li>Remover o banco de dados de teste e o acesso a ele.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">mysql -u root -p
+</code></pre></div><p>Digite a senha do root criada anteriormente.</p>
+<p>Agora, execute um comando por vez e com atenção. Recomendo colar os comandos no bloco de notas antes e fazer alterações, caso necessário.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">create</span><span class="w"> </span><span class="k">database</span><span class="w"> </span><span class="n">zabbix</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">utf8mb4</span><span class="w"> </span><span class="k">collate</span><span class="w"> </span><span class="n">utf8mb4_bin</span><span class="p">;</span><span class="w">
+</span></code></pre></div><p>No próximo passo, troque a senha &ldquo;password&rdquo; por uma de sua preferência, de maneira que seja segura e fácil de lembrar, ou salve-a em um local seguro. Assim, poderemos configurar o acesso nos próximos passos. (Deixarei &ldquo;password&rdquo; no tutorial para facilitar, ok?)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">create</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="n">zabbix</span><span class="o">@</span><span class="n">localhost</span><span class="w"> </span><span class="n">identified</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="s1">&#39;password&#39;</span><span class="p">;</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">grant</span><span class="w"> </span><span class="k">all</span><span class="w"> </span><span class="k">privileges</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">zabbix</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">zabbix</span><span class="o">@</span><span class="n">localhost</span><span class="p">;</span><span class="w">
+</span></code></pre></div><pre tabindex="0"><code>set global log_bin_trust_function_creators = 1;
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="n">quit</span><span class="p">;</span><span class="w">
+</span></code></pre></div><p>Se tudo estiver certo, as saídas devem estar semelhantes a estas:</p>
+<p><img src="/images/img5.png" alt="Queries"></p>
+<p>Agora, importaremos o schema do banco, assim como os dados iniciais para o Zabbix Server. A senha que será solicitada é a senha que você informou no comando SQL, a qual recomendei mudar. Não é a senha root do banco.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz <span class="p">|</span> mysql --default-character-set<span class="o">=</span>utf8mb4 -uzabbix -p zabbix
+</code></pre></div><p>Desabilite a opção <code>log_bin_trust_function_creators</code> após importar o esquema do banco de dados.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="n">mysql</span><span class="w"> </span><span class="o">-</span><span class="n">uroot</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">set</span><span class="w"> </span><span class="k">global</span><span class="w"> </span><span class="n">log_bin_trust_function_creators</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="n">quit</span><span class="p">;</span><span class="w">
+</span></code></pre></div><p>Fazendo isso, estamos quase no final desta primeira fase da instalação. Agora, vamos fazer algumas configurações no arquivo <em>zabbix_server.conf</em>, que é responsável por várias configurações do Zabbix.</p>
+<p>Nossa primeira alteração é inserir a senha do banco no arquivo de configuração.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">nano /etc/zabbix/zabbix_server.conf
+</code></pre></div><p>Procure a linha <em>DBPassword</em> e coloque a senha definida na hora da criação do banco. Você pode usar <code>Ctrl + W</code> para pesquisar por <em>DBPassword</em> e alterar o arquivo.</p>
+<p><img src="/images/img6.png" alt="zabbix.conf"></p>
+<p>Já podemos sair, salvar as novas configurações e reiniciar os serviços do Zabbix Server, Apache e Agent.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">systemctl restart zabbix-server zabbix-agent apache2
+</code></pre></div><p>E que esses serviços sejam inicializados após qualquer reboot do sistema.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">systemctl <span class="nb">enable</span> zabbix-server zabbix-agent apache2
+</code></pre></div><h3 id="finalizando-a-instalação-pela-interface-web">Finalizando a instalação pela interface Web</h3>
+<p>Para acessar a interface web, vá para <em><a href="http://ENDERE%C3%87O_IP/zabbix">http://ENDEREÇO_IP/zabbix</a></em>. Você pode verificar o endereço IP usando o comando:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">hostname -I
+</code></pre></div><p><img src="/images/img8.png" alt="InterfaceWeb"></p>
+<p>Agora, já temos a nossa interface web para finalizar a instalação do Zabbix. No próximo passo, basta inserir a senha definida no banco e continuar.
+<img src="/images/img9.png" alt="InterfaceWeb">
+Neste passo, você definirá o nome do seu servidor, o fuso horário e os temas. Lembre-se de ajustar o fuso horário corretamente.
+<img src="/images/img10.png" alt="InterfaceWeb">
+Ele trará um resumo das configurações. Basta seguir, e ele informará que o Zabbix foi instalado com sucesso e que o arquivo de configuração <code>.php</code> foi criado corretamente.</p>
+<p>Agora, chegamos à tela inicial de login:
+<img src="/images/img11.png" alt="InterfaceWeb">
+Usuário: Admin (lembre-se, a senha é &ldquo;A&rdquo; maiúscula e não minúscula).</p>
+<p>Senha: zabbix</p>
+<p>Esta é a primeira tela do Zabbix. Recomendo que você já troque a senha inicial do Zabbix.
+<img src="/images/img12.png" alt="InterfaceWeb">
+No próximo post, instalaremos o Grafana, faremos a integração entre os dois e mostraremos como essa combinação é campeã no monitoramento.</p>
+<p>E como diria Gandalf: &ldquo;O que você faz com o tempo que tem?&rdquo; Bem, nós estamos usando o nosso tempo para melhorar o monitoramento com Zabbix e Grafana!</p>
+
+      </div>
+
+      
+        <footer class="post-footer">
+          <div class="post-tags-footer">
+            <span class="tags-label">Tags:</span>
+            
+              <a href="/tags/zabbix" class="post-tag">Zabbix</a>
+            
+              <a href="/tags/grafana" class="post-tag">Grafana</a>
+            
+              <a href="/tags/monitoramento" class="post-tag">Monitoramento</a>
+            
+          </div>
+        </footer>
+      
+
+
+      <nav class="post-navigation" aria-label="Post navigation">
+        
+          <a
+            href="/posts/configurando-ip-estatico-no-debian-12/"
+            class="nav-link nav-prev"
+            aria-label="Previous post: Configurando IP Estático no Debian">
+            <span class="nav-label">Previous</span>
+            <span class="nav-title">Configurando IP Estático no Debian</span>
+          </a>
+        
+
+        
+      </nav>
+    </article>
+
+    
+  <aside class="post-toc" id="post-toc" aria-label="Table of contents">
+    <button
+      class="toc-toggle"
+      id="toc-toggle"
+      aria-expanded="true"
+      aria-controls="toc-content"
+      aria-label="Toggle table of contents">
+      <svg
+        class="toc-burger-icon"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true">
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+      <span class="toc-toggle-text">Table of Contents</span>
+      <svg
+        class="toc-chevron-icon"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+    </button>
+    <div class="toc-content" id="toc-content">
+      <nav class="toc-nav" aria-label="Table of contents">
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#pré-requisitos">Pré-requisitos:</a></li>
+          </ul>
+        </li>
+        <li><a href="#criando-o-ambiente">Criando o ambiente</a>
+          <ul>
+            <li><a href="#1º-passo-atualizar-a-máquina">1º Passo: Atualizar a máquina:</a></li>
+            <li><a href="#2º-passo-instalaremos-de-uma-única-vez-o-apache-mariadb-e-php">2º Passo: Instalaremos de uma única vez o Apache, MariaDB e PHP.</a></li>
+            <li><a href="#3º-alguns-pacotes-úteis-na-hora-de-configurar-que-recomendo-instalar">3º Alguns pacotes úteis na hora de configurar que recomendo instalar:</a></li>
+          </ul>
+        </li>
+        <li><a href="#instalando-zabbix-server">Instalando zabbix server</a></li>
+        <li><a href="#finalizando-a-instalação-pela-interface-web">Finalizando a instalação pela interface Web</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+      </nav>
+    </div>
+  </aside>
+
+
+  </div>
+
+    </main>
+
+    <footer>
+      <footer class="site-footer">
+  <div class="footer-content">
+    <p class="footer-text">
+      &copy;
+      
+      2025-2026
+      
+      Manoel Augusto.
+      
+    </p>
+    
+      <div class="footer-social">
+        <div class="social-links">
+  
+    <a
+      href="https://github.com/ManoelAugusto-F"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="social-link"
+      aria-label="GitHub">
+      <svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          fill-rule="evenodd"
+          d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+          clip-rule="evenodd"></path>
+      </svg>
+    </a>
+  
+
+  
+    <a
+      href="https://www.linkedin.com/in/manoel-augusto/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="social-link"
+      aria-label="LinkedIn">
+      <svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path>
+      </svg>
+    </a>
+  
+
+  
+    <a href="mailto:manoelaugusto.ferreira@gmail.com" class="social-link" aria-label="Email">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+      </svg>
+    </a>
+  
+</div>
+
+      </div>
+    
+  </div>
+</footer>
+
+    </footer>
+
+    <div id="search-modal" class="search-modal" aria-hidden="true" role="dialog" aria-label="Search">
+  <div class="search-modal-backdrop" id="search-modal-backdrop"></div>
+  <div class="search-modal-container">
+    <div class="search-input-wrapper">
+      <svg class="search-input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+      </svg>
+      <input
+        type="search"
+        id="search-input"
+        class="search-input"
+        placeholder="Search..."
+        autocomplete="off"
+        aria-label="Search input">
+      <button class="search-input-clear" id="search-input-clear" aria-label="Clear search">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+        </svg>
+      </button>
+      <button class="search-modal-close" id="search-modal-close" aria-label="Close search">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+    <div id="search-results" class="search-results"></div>
+  </div>
+</div>
+
+    
+
+    <button id="scroll-to-top" class="scroll-to-top" aria-label="Scroll to top" type="button">
+  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+  </svg>
+</button>
+
+
+    
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.min.54c32c84f98ab3fea54333a57a1152560e36ef76cba988882c78e24dbec389fc.js" defer></script>
+
+  </body>
+</html>

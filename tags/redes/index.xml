@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Redes on Bits de Conhecimento</title>
+    <link>https://www.bitsdeconhecimento.blog.br/tags/redes/</link>
+    <description>Recent content in Redes on Bits de Conhecimento</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <copyright>Manoel Augusto</copyright>
+    <lastBuildDate>Sun, 07 Jul 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bitsdeconhecimento.blog.br/tags/redes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Configurando IP Estático no Debian</title>
+      <link>https://www.bitsdeconhecimento.blog.br/posts/configurando-ip-estatico-no-debian-12/</link>
+      <pubDate>Sun, 07 Jul 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bitsdeconhecimento.blog.br/posts/configurando-ip-estatico-no-debian-12/</guid>
+      <description>Neste tutorial, aprenderemos a configurar uma interface de rede para utilizar um IP estático no Debian.
+Quando é necessário um IP Estático? Um IP estático é essencial em situações como:
+ Servidores Web Bancos de dados Serviços de NAS Qualquer serviço que precise de um IP fixo  Se o host estiver configurado para DHCP, o IP pode mudar após reinicializações ou expiração do IP.
+Configuração do IP Estático   Identifique o Nome da Interface de Rede</description>
+    </item>
+    
+  </channel>
+</rss>

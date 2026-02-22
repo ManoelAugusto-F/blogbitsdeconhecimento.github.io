@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Introdução on Bits de Conhecimento</title>
+    <link>https://www.bitsdeconhecimento.blog.br/categories/introdu%C3%A7%C3%A3o/</link>
+    <description>Recent content in Introdução on Bits de Conhecimento</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <copyright>Manoel Augusto</copyright>
+    <lastBuildDate>Fri, 22 Nov 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bitsdeconhecimento.blog.br/categories/introdu%C3%A7%C3%A3o/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Sobre mim e o Blog</title>
+      <link>https://www.bitsdeconhecimento.blog.br/about/</link>
+      <pubDate>Fri, 22 Nov 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bitsdeconhecimento.blog.br/about/</guid>
+      <description>Bem-vindo ao meu Blog! Oi, sou Manoel Augusto, e este blog surgiu para compartilhar minha jornada de transição de carreira para a área de TI. Aqui, vou dividir o que estou aprendendo, os desafios que estou enfrentando e minhas descobertas sobre Cloud, Infraestrutura e Segurança.
+Atualmente, sou estudante de Bacharelado em Sistemas de Informação no IFG e técnico em suporte e manutenção. Estou me especializando em Cloud Computing e já conquistei certificações como MS-900, AWS Certified Cloud Practitioner e Oracle Cloud Infrastructure Foundations.</description>
+    </item>
+    
+  </channel>
+</rss>
