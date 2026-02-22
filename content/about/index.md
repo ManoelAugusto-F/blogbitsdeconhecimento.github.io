@@ -18,9 +18,9 @@ Sei que blogs e tutoriais hoje em dia estão sendo cada vez mais dominados por I
 
 Então, se você também curte TI, está passando por uma transição de carreira ou só quer aprender mais sobre o mundo da tecnologia, fique à vontade!  
 Que a força do aprendizado esteja com você — e que a jornada nunca termine. Como diria o mestre Yoda:  
-> “O caminho do aprendizado é longo, mas a recompensa é grande!”
+“O caminho do aprendizado é longo, mas a recompensa é grande!”
 
-Vamos nessa! 🚀
+Vamos nessa!
 
 ## Por que eu voltei?
 

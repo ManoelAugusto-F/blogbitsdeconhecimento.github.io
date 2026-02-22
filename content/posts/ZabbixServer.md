@@ -215,9 +215,18 @@ Usuário: Admin (lembre-se, a senha é "A" maiúscula e não minúscula).
 Senha: zabbix
 
 Esta é a primeira tela do Zabbix. Recomendo que você já troque a senha inicial do Zabbix.
-![InterfaceWeb](/images/img12.png)
+![Interface Web](/images/img12.png)
+
+Agora que estamos com acesso à interface web, vamos criar um usuário para ser usado na conexão da API no Grafana. Clique, no menu lateral esquerdo, em **Usuários** e depois em **Criar usuário**, no canto superior direito.
+
+![Interface Web](/images/img13.png)
+
+Você vai preencher o usuário, nome e sobrenome como sua imaginação desejar, assim como a senha. Por enquanto, vamos deixar os grupos vazios, pois iremos criar um grupo somente para isso. Antes de salvar, na parte superior, em **Role**, selecione a opção **User**. Depois disso, pode salvar.
+
+Agora vamos criar um grupo para o Grafana apenas com permissão de leitura aos hosts, etc. Em cada aba acima, você vai entrar, selecionar tudo e marcar apenas como **Leitura**. Somente isso. Assim, estará configurado o nosso usuário para utilizarmos a API no Grafana.
+
+![Interface Web](/images/img14.png)
+
 No próximo post, instalaremos o Grafana, faremos a integração entre os dois e mostraremos como essa combinação é campeã no monitoramento.
 
-
-
-E como diria Gandalf: "O que você faz com o tempo que tem?" Bem, nós estamos usando o nosso tempo para melhorar o monitoramento com Zabbix e Grafana!
+E, como diria Gandalf: "O que você faz com o tempo que tem?" Bem, nós estamos usando o nosso tempo para melhorar o monitoramento com Zabbix e Grafana!
