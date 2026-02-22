@@ -1,7 +1,7 @@
 ---
 title: "Tutorial de como instalar e configurar o Zabbix Server e o Grafana Parte 2"
 date: 2026-02-21T20:47:15-03:00
-draft: true
+draft: false
 categories:
   - Tutorial
 author: "Manoel Augusto"
