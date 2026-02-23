@@ -20,7 +20,6 @@ Olá pessoal, há quanto tempo. Peço desculpa por esse sumiço de mais de um an
 ## Pré-requisitos
 
 * Um servidor Debian ou Ubuntu atualizado, com acesso à internet e com acesso root.
-* Seu servidor Zabbix deve estar configurado e rodando, com acesso admin, para podermos fazer a configuração mais à frente.
 
 ## Preparando o terreno
 
