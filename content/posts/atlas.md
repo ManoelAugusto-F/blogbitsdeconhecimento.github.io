@@ -1,7 +1,7 @@
 ---
 title: "Atlas"
 date: 2026-06-07T19:18:26-03:00
-draft: true
+draft: false
 categories:
   - 
 author: "Manoel Augusto"
